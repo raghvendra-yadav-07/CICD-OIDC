@@ -19,7 +19,7 @@ jobs :
                      uses : aws-actions/configure-aws-credentials@v4
                      with : 
                           aws-region : us-east-1
-                          role-to-assume : ${{secrets.AWS_IAM_ROLE}}
+                          role-to-assume : ${{ secrets.AWS_IAM_ROLE }}
                    - name  : add file to s3
                      run  :
                                echo "uploading - s3 file "
