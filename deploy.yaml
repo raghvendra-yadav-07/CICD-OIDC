@@ -1,0 +1,27 @@
+name : this is a dummy yaml file 
+
+on :
+   push :
+       branches :
+                - main 
+jobs :
+     deploy-files :
+                name : nginx
+                runs-on : ubuntu-latest
+          
+steps : 
+      - name : checkout
+        uses : action/checkout@v4
+      - name : apt update
+        run  : 
+             echo "apt-update"
+             sudo apt update
+      - name : downlord nginx 
+        run  : 
+             echo "downlording nginx"
+             sudo apt install nginx -y
+      - name : nginx start
+        run  : 
+             echo "installing nginx "
+             sudo systemctl start nginx 
+             
