@@ -20,3 +20,5 @@ jobs :
                      run  :
                                echo "uploading - s3 file "
                                aws s3 cp ./index.html s3://316704942911/index.html
+                   - name: Check AWS identity
+                     run: aws sts get-caller-identity
