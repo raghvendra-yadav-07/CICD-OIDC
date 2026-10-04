@@ -12,7 +12,7 @@ jobs :
                    - name : checkout
                      uses : actions/checkout@v4
                    - name : cofigure aws credentials 
-                     uses : aws-actions/configure_aws_credentials@v4
+                     uses : aws-actions/configure-aws-credentials@v4
                      with : 
                           aws-region : us-east-1
                           role-to-assume : ${{secrets.AWS_IAM_ROLE}}
