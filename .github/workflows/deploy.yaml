@@ -8,16 +8,15 @@ jobs :
            name : s3_bucket_push
            runs-on : ubuntu-latest 
          
-steps : 
-       - name : checkout
-         uses : actions/checkout@v4
-       - name : cofigure aws credentials 
-         uses : aws-actions/configure_aws_credentials@v4
-         with : 
-              aws-region : 
-                          us-east-1
-              role-to-assume : ${{secrets.AWS_IAM_ROLE}}
-       - name : add file to s3
-         run  :
-               echo "uploading - s3 file "
-               aws s3 cp ./index.html s3://316704942911/index.html
+           steps : 
+                   - name : checkout
+                     uses : actions/checkout@v4
+                   - name : cofigure aws credentials 
+                     uses : aws-actions/configure_aws_credentials@v4
+                     with : 
+                          aws-region : us-east-1
+                          role-to-assume : ${{secrets.AWS_IAM_ROLE}}
+                   - name  : add file to s3
+                     run  :
+                               echo "uploading - s3 file "
+                               aws s3 cp ./index.html s3://316704942911/index.html
