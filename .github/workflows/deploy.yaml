@@ -25,6 +25,6 @@ jobs:
           aws-region: us-east-1
 
       - name: add file to bucket 
-        run :
+        run : |
             echo "adding file in s3 bucket "
             aws s3 cp ./index.html s3://316704942911/index.html
