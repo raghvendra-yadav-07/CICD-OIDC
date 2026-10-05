@@ -1,0 +1,41 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: arn:aws:iam::316704942911:role/git_action_role
+          aws-region: us-east-1
+
+      - name: Upload website to S3
+        run: |
+          aws s3 cp ./index.html s3://316704942911/index.html
+
+      - name: Deploy to EC2 using SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids "i-0457fe98dd2e67515" \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "aws s3 cp s3://316704942911/index.html /tmp/index.html",
+              "sudo cp /tmp/index.html /var/www/html/index.html",
+              "sudo systemctl reload nginx"
+            ]' \
+            --region us-east-1
