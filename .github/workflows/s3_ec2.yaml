@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -27,13 +28,14 @@ jobs:
         run: |
           aws s3 cp index.html s3://316704942911/index.html
 
-      - name: Copy index.html to EC2
+      - name: Deploy to EC2 using SSM
         run: |
           aws ssm send-command \
             --instance-ids "i-0457fe98dd2e67515" \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
-              "aws s3 cp s3://316704942911/index.html /var/www/html/index.html",
+              "aws s3 cp s3://316704942911/index.html /tmp/index.html",
+              "sudo cp /tmp/index.html /var/www/html/index.html",
               "sudo systemctl reload nginx"
             ]' \
             --region us-east-1
