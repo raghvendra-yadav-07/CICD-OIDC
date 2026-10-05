@@ -1,6 +1,6 @@
 resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.practice_ssm.id
-  cidr_block = "10.0.1.0/20"
+  cidr_block = "10.0.0.0/20"
 
   tags = {
     Name = "aws-ssm"
