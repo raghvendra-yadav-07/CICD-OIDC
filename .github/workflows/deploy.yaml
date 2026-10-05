@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: arn:aws:iam::316704942911:role/git_action_role
-          aws-region: ap-southeast-1
+          aws-region: us-east-1
 
       - name: add file to bucket 
         run :
