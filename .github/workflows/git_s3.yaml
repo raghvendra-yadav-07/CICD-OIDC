@@ -16,11 +16,13 @@ jobs :
 
             - name : checkout 
               uses : actions/checkout@v4
+           
             - name : configure aws
-              uses : aws-actions/configure_aws_credentials@v4
+              uses : aws-actions/configure-aws-credentials@v4
               with : 
                 role-to-assume : arn:aws:iam::316704942911:role/github_to_s3
                 aws-region : us-east-1
+           
             - name : upload html file 
               run : |
                   echo "uploading html file to s3 "
